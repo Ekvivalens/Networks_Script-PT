@@ -1,0 +1,185 @@
+BR1:
+enable
+conf t
+hostname BR1
+banner motd #Belépni TILOS#
+line vty 0 15
+login local
+transport input ssh
+exit
+line console 0
+password cisco
+login
+exit
+line aux 0
+password cisco
+login
+exit
+enable secret cisco
+service password-encryption 
+ip domain-name BR1.hu
+crypto key generaTE rsa generaL-key modulus 1024
+username admin priv 15 secret cisco
+ip ssh version 2
+int G0/1
+ip add 192.168.20.1 255.255.255.0
+no sh
+exit
+int s0/0/0
+ip address 192.168.10.1 255.255.255.252
+no sh
+exit
+router rip
+version 2
+no auto-summary
+network 192.168.10.0
+network 192.168.20.0
+___________________________________________________
+
+BR2:
+enable
+conf t
+hostname BR2
+banner motd #Belépni TILOS#
+line vty 0 15
+login local
+transport input ssh
+exit
+line console 0
+password cisco
+login
+exit
+line aux 0
+password cisco
+login
+exit
+enable secret cisco
+service password-encryption 
+ip domain-name BR2.hu
+crypto key generaTE rsa generaL-key modulus 1024
+username admin priv 15 secret cisco
+ip ssh version 2
+int G0/1
+no shut
+int G0/1.10
+encapsulation dot1Q 10
+ip address 192.168.30.1 255.255.255.128
+int g0/1.20
+encapsulation dot1Q 20
+ip address 192.168.30.129 255.255.255.128
+exit
+int s0/0/0
+ip address 192.168.10.2 255.255.255.252
+no sh
+exit
+int s0/0/1
+ip address 192.168.10.5 255.255.255.252
+no sh
+exit
+ip dhcp excluded-address 192.168.30.1 192.168.30.10
+ip dhcp pool LAN10
+network 192.168.30.0 255.255.255.128
+default-router 192.168.30.1
+dns 209.165.201.10
+exit
+ip dhcp excluded-address 192.168.30.129 192.168.30.139
+ip dhcp pool LAN20
+network 192.168.30.128 255.255.255.128
+default-router 192.168.30.129
+dns 209.165.201.10
+exit
+router rip
+version 2
+no auto-summary
+network 192.168.30.0
+network 192.168.10.0
+network 192.168.10.4
+_______________________________________________
+BR3:
+enable
+conf t
+hostname BR3
+banner motd #Belépni TILOS#
+line vty 0 15
+login local
+transport input ssh
+exit
+line console 0
+password cisco
+login
+exit
+line aux 0
+password cisco
+login
+exit
+enable secret cisco
+service password-encryption 
+ip domain-name BR3.hu
+crypto key generaTE rsa generaL-key modulus 1024
+username admin priv 15 secret cisco
+ip ssh version 2
+int G0/1
+ip add 192.168.40.1 255.255.255.0
+no sh
+exit
+int s0/0/1
+ip address 192.168.10.6 255.255.255.252
+no sh
+exit
+int s0/0/0
+ip address 209.165.200.2 255.255.255.248
+no sh
+exit
+router rip
+version 2
+no auto-summary
+network 192.168.10.4
+network 192.168.40.0
+network 209.165.200.0
+
+
+BS2_2:
+enable
+conf t
+hostname BS2_2
+banner motd #Belépni TILOS#
+line vty 0 15
+login local
+transport input ssh
+exit
+line console 0
+password cisco
+login
+exit
+enable secret cisco
+service password-encryption 
+ip domain-name BS2_2.hu
+crypto key generate rsa general-key modulus 1024
+username admin priv 15 secret cisco
+ip ssh version 2
+interface vlan 10
+ip address 192.168.30.2 255.255.255.128
+no shutdown
+exit
+interface vlan 20
+ip address 192.168.30.130 255.255.255.128
+no shutdown
+exit
+int range f0/1-12
+switchport mode access
+switchport access vlan 10
+switchport port-security
+switchport port-security maximum 3
+switchport port-security mac-address sticky
+switchport port-security violation shut
+int range f0/13-24
+switchport mode access
+switchport access vlan 20
+switchport port-security
+switchport port-security maximum 3
+switchport port-security mac-address sticky
+switchport port-security violation shut
+int g0/1
+switchport mode trunk
+no sh
+exit
