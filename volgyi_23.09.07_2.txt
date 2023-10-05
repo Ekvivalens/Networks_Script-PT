@@ -1,0 +1,59 @@
+R0:
+en
+conf t
+hostname R0
+int f0/0
+ip add 202.39.61.254 255.255.255.0
+no sh
+exit
+int f0/1
+ip add 202.39.50.1 255.255.255.240
+no sh
+exit
+ip route 0.0.0.0 0.0.0.0 f0/0
+
+
+en
+conf t
+ipv6 unicast-routing
+int f0/0
+ipv6 enable
+ipv6 add 2023:9:14:1::1/64
+ipv6 add FE80::1 link-local
+no sh
+exit
+int f0/1
+ipv6 enable
+ip add 2023:9:14:B::2/64
+ipv6 add FE80::1 link-local
+no sh
+exit
+ip route ::/0 f0/1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+SA:
+en
+conf t
+hostname SA
+int vlan1
+ip add 192.168.10.10 255.255.255.0
+no sh
+exit

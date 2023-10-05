@@ -1,0 +1,139 @@
+1. Melyik két módszer használható a következő ugrás azonosítására 
+egy statikus útvonalban?
+-célinterfész
+-cél IP-cím
+-célhálózati cím
+-forrás IP-cím
+
+2. Melyik IPv4 statikus útvonalra vonatkozó állítás igaz?
+-A célhálózatot a hálózati cím és a wildcart maszk
+segítségével azonosítja.
+-A távolság kulcsszó a teljesen meghatározott statikus útvonal
+létrehozására szolgál.
+-A forráshálózatot a hálózati cím segítségével azonosítjuk,
+és a jokermaszkot.
+-Kizárólag a kilépési interfész használata gyakori a
+pont-to-pont konfigurációban 
+
+3. Hogyan azonosítják a célhálózatot egy IPv6 statikus útvonalban?
+-Using an IPv6 prefix and prefix length
+-Using an IPv6 prefix and subnet mask
+-Using an IPv6 prefix and wildcard mask
+-Using an IPv6 prefix only
+
+
+
+
+
+
+
+
+
+
+
+
+1. Mi az a lebegő statikus útvonal?
+	-Az alapértelmezettnél nagyobb adminisztratív
+távolsággal bevitt statikus útvonal.
+
+2. Mik vannak egy forgalomirányító irányítótáblájában?
+	-Alhálózatok és következő ugrás címek.
+
+3. A statikus útvonalválasztás:
+	-Kézi konfigurációt igényel.
+
+4. . Mikor ajánlott statikus útvonalválasztást használni?
+	-Kisebb hálózatokban vagy stabil topológiákban.
+
+5.	A 192.168.0.0/24, 
+	a 192.168.1.0/24,
+	a 192.168.2.0/24,
+	a 192.168.3.0/24 című hálózatok felé az R1 Ruter
+S0/0/0 nevű interfacen keresztül küldhetünk csomagot.
+Melyik összevont címmel helyettesíthetjük a négy címet?
+	-
+
+6.  Melyik parancsot használjuk statikus útvonal
+konfigurálására egy Cisco routeren?
+	-ip route
+
+7. Mit jelent egy direkt útvonal?
+	-Az útvonal egy közvetlen kapcsolatot használ.
+
+8. Milyen hálózati eszközöket használnak általában
+útvonalválasztásra a hálózatokban?
+	-Router-ek és Layer 3 kapcsolók
+
+9. Mit jelent a floating static route koncepciója a statikus útvonalakban?
+	-Tartalék útvonalak, amelyek akkor lépnek életbe,
+ha a fő útvonal elérhetetlen.
+
+10. Melyik parancsot használjuk a Cisco routeren
+egy statikus útvonal törléséhez?
+	-no ip route
+
+11. Mi az aggregated útvonal fogalma a statikus útvonalakban?
+	-
+
+12. Mi a célja a recursive statikus útvonalnak?
+	-Az útvonal újbóli kiértékelése, ha változás történik.
+
+13. Mi a statikus útvonalak egyik hátránya az
+OSPF vagy RIP protokollokhoz képest?
+	-Nem alkalmazkodnak automatikusan a hálózati változásokhoz.
+
+14. Mit jelent a statikus útvonal statikus túlélési időszaka?
+	-
+
+15. Hogyan határozza meg egy router, hogy melyik statikus útvonalat kell
+használnia, ha több azonos célú útvonal érhető el?
+	-Az útvonal költsége alapján
+
+16. Mi a célja a statikus útvonalak redundáns konfigurációjának?
+	-
+
+17. Melyik állítás igaz a statikus útvonalak módosítására?
+	-A statikus útvonalakat bármikor módosíthatja a hálózatkezelő.
+
+18. Mit jelent a statikus útvonalak szekvenciális kiértékelése?
+	-Az útvonalak kiértékelése a legkisebb költségtől a legnagyobbig.
+
+19. Mit jelent a statikus útvonalak administrative distance fogalma?
+	-
+
+20. Melyik protokoll és adminisztratív távolság párosítás helyes?
+	-OSPF 110
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

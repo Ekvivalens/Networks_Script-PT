@@ -1,0 +1,243 @@
+R1:
+en
+conf t
+hostname R1
+banner motd #Nope#
+int g0/0
+ip add 192.168.0.1 255.255.255.192
+no sh 
+exit
+int g0/1
+ip add  192.168.0.129 255.255.255.252
+no sh
+exit
+int g0/2
+ip add 192.168.0.138 255.255.255.252
+no sh
+exit
+router rip
+version 2
+no auto-summary
+passive-interface g0/0
+network 192.168.0.0
+network 192.168.0.128
+network 192.168.0.136
+ip route 0.0.0.0 0.0.0.0 g0/1
+
+---------------------------
+
+R2:
+en
+conf t
+hostname R2
+banner motd #Nope#
+int g0/0
+ip add 192.168.0.65 255.255.255.224
+no sh 
+exit
+int g0/1
+ip add 192.168.0.130 255.255.255.252
+no sh
+exit
+int g0/2
+ip add 192.168.0.133 255.255.255.252
+no sh
+exit
+int s0/0/0
+ip add 192.168.0.141 255.255.255.252
+no sh
+exit
+router rip
+version 2
+no auto-summary
+passive-interface g0/0
+network 192.168.0.64
+network 192.168.0.128
+network 192.168.0.132
+network 192.168.0.140
+ip route 0.0.0.0 0.0.0.0 s0/0/0
+
+---------------------------
+R3:
+en
+conf t
+hostname R3
+banner motd #Nope#
+int g0/0
+ip add 192.168.0.97 255.255.255.224
+no sh 
+exit
+int g0/1
+ip add 192.168.0.134 255.255.255.252
+no sh
+exit
+int g0/2
+ip add 192.168.0.137 255.255.255.252
+no sh
+exit
+router rip
+version 2
+no auto-summary
+passive-interface g0/0
+network 192.168.0.96
+network 192.168.0.136
+network 192.168.0.132
+ip route 0.0.0.0 0.0.0.0 g0/1
+___________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
+
+R4:
+en
+conf t
+hostname R4
+int g0/0
+ip add 192.168.10.1 255.255.255.128
+no sh 
+exit
+int g0/1
+ip add 192.168.10.177 255.255.255.252
+no sh
+exit
+int g0/2
+ip add 192.168.10.186 255.255.255.252
+no sh
+exit
+ip route 192.168.10.128 255.255.255.224 g0/1
+ip route 192.168.10.180 255.255.255.252 g0/2
+ip route 192.168.10.160 255.255.255.240 g0/2
+ip route 0.0.0.0 0.0.0.0 g0/1
+
+---------------------------
+
+
+R5:
+en
+conf t
+hostname R5
+int g0/0
+ip add 192.168.10.129 255.255.255.224
+no sh 
+exit
+int g0/1
+ip add 192.168.10.178 255.255.255.252
+no sh
+exit
+int g0/2
+ip add 192.168.10.181 255.255.255.252
+no sh
+exit
+int s0/0/0 
+ip add 192.168.0.142 255.255.255.252
+no sh
+exit
+int s0/0/1
+ip add 192.168.10.189 255.255.255.252
+no sh
+exit
+ip route 192.168.10.0 255.255.255.128 g0/1
+ip route 192.168.10.160 255.255.255.240 g0/2
+ip route 192.168.10.184 255.255.255.252 g0/1
+ip route 192.168.0.0 255.255.255.0 s0/0/0
+ip route 192.168.20.0 255.255.255.0 s0/0/1
+
+---------------------------
+
+R6:
+en
+conf t
+hostname R6
+int g0/0
+ip add 192.168.10.161 255.255.255.240
+no sh 
+exit
+int g0/1
+ip add 192.168.10.182 255.255.255.252
+no sh
+exit
+int g0/2
+ip add 192.168.10.185 255.255.255.252
+no sh
+exit
+ip route 192.168.10.128 255.255.255.224 g0/1
+ip route 192.168.10.0 255.255.255.128 g0/2
+ip route 192.168.10.176 255.255.255.252 g0/2
+ip route 0.0.0.0 0.0.0.0 g0/1
+
+________________________________________________________________________________________________________________________________________________________________________________________________________________________
+
+R7:
+en
+conf t
+hostname R7
+banner motd #Nope#
+int g0/0
+ip add 192.168.20.1 255.255.255.192
+no sh 
+exit
+int g0/1
+ip add 192.168.20.129 255.255.255.252
+no sh
+exit
+int g0/2
+ip add 192.168.20.138 255.255.255.252
+no sh
+exit
+router ospf  10
+router-id 1.1.1.1
+network 192.168.20.0 0.0.0.63 area 0
+network 192.168.20.128 0.0.0.3 area 0
+network 192.168.20.136 0.0.0.3 area 0
+ip route 0.0.0.0 0.0.0.0 g0/1
+---------------------------
+R8:
+en
+conf t
+hostname R8
+banner motd #Nope#
+int g0/0
+ip add 192.168.20.165 255.255.255.224
+no sh 
+exit
+int g0/1
+ip add 192.168.20.130 255.255.255.252
+no sh
+exit
+int g0/2
+ip add 192.168.20.133 255.255.255.252
+no sh
+exit
+int s0/0/1
+ip add 192.168.10.190 255.255.255.252
+no sh
+exit
+router ospf 10
+router-id 2.2.2.2
+network 192.168.20.128 0.0.0.3 area 0
+network 192.168.20.132 0.0.0.3 area 0
+network 192.168.20.64 0.0.0.31 area 0
+network 192.168.10.188 0.0.0.3 area 0
+ip route 0.0.0.0 0.0.0.0 s0/0/1
+---------------------------
+
+R9:
+en
+conf t
+hostname R9
+banner motd #Nope#
+int g0/0
+ip add 192.168.20.97 255.255.255.224
+no sh 
+exit
+int g0/1
+ip add 192.168.20.134 255.255.255.252
+no sh
+exit
+int g0/2
+ip add 192.168.20.137 255.255.255.252
+no sh
+exit
+router ospf 10
+router-id 3.3.3.3
+network 192.168.20.96 0.0.0.31 area 0
+network 192.168.20.136 0.0.0.3 area 0
+network 192.168.20.132 0.0.0.3 area 0
+ip route 0.0.0.0 0.0.0.0 g0/1
